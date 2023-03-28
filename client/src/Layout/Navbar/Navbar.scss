@@ -1,71 +1,102 @@
-.navbar{
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    background-color: #013914;
-    color: white;
-    transition:  0.5s all ease;
-    position: sticky;
-    top: 0;
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #013914;
+  color: white;
+  transition: 0.5s all ease;
+  position: sticky;
+  top: 0;
 
-    &.active{
-        background-color: white;
-        color: black;
+  &.active {
+    background-color: white;
+    color: black;
+  }
+
+  .navbarContainer {
+    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px;
+
+    .fiverLogo {
+      font-size: 34px;
+      font-weight: bold;
+
+      .fiverText {
+      }
+      .fiverDot {
+        color: #1dbf73;
+      }
     }
+    .navLinks {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-weight: 500;
+      font-family: "Montserrat", sans-serif;
 
-    .navbarContainer{
-        width:1400px;
+      .user {
         display: flex;
-        justify-content: space-between;
-        padding : 20px 0px;
+        align-items: center;
+        position: relative;
+        gap: 10px;
+        cursor: pointer;
 
-        .fiverLogo{
-            font-size: 34px;
-            font-weight: bold;
-
-            .fiverText{
-
-            }
-            .fiverDot{
-                color: #1dbf73;
-            }
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          object-fit: cover;
         }
-        .navLinks{
-            display: flex;
-            gap: 24px;
-            align-items: center;
-            font-weight: 500;
-            font-family: "Montserrat", sans-serif;
 
-            button{
-                color: white;
-                padding: 10px 20px;
-                border-radius: 5px;
-                border: 1px solid white;
-                cursor: pointer;
-                background-color: transparent;
-            
-                &:hover{
-                    background-color: #1dbf73;
-                    border-color: #1dbf73;
-                }
-            }
+        .options {
+          position: absolute;
+          top: 50px;
+          right: 0;
+          padding: 20px;
+          background-color: white;
+          border-radius: 10px;
+          border: 1px solid lightgrey;
+
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          color: grey;
+          width: 200px;
+          font-weight: 200;
         }
-    }
+      }
 
-    hr{
-        width: 100%;
-        height:0;
-        border:0.5px solid lightgrey;
-    }
+      button {
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 1px solid white;
+        cursor: pointer;
+        background-color: transparent;
 
-    .menu{
-        width: 1400px;
-        padding: 10px 0px;
-        display: flex;
-        justify-content: space-between;
-        font-weight: 300;
-        color: gray;
-        font-family: "Montserrat", sans-serif;
+        &:hover {
+          background-color: #1dbf73;
+          border-color: #1dbf73;
+        }
+      }
     }
+  }
+
+  hr {
+    width: 100%;
+    height: 0;
+    border: 0.5px solid lightgrey;
+  }
+
+  .menu {
+    width: 1400px;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 300;
+    color: gray;
+    font-family: "Montserrat", sans-serif;
+  }
 }
