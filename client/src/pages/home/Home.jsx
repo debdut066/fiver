@@ -1,9 +1,12 @@
 import React from 'react'
 import "./Home.scss"
+import Featured from '../../components/featured'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <Featured />
+    </div>
   )
 }
 
