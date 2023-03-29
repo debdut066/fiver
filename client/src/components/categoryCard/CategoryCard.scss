@@ -1,0 +1,30 @@
+.CategoryCard {
+  width: 252px;
+  height: 344px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+
+  img {
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .desc {
+    font-weight: 300;
+    position: absolute;
+    top: 15px;
+    left: 14px;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 24px;
+    position: absolute;
+    left: 15px;
+    top: 40px;
+  }
+}
