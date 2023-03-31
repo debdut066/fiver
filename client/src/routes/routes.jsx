@@ -2,7 +2,7 @@ import React from "react"
 import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../Layout/DefaultLayout/DefaultLayout";
 import Home from "../pages/home/Home";
-import Gigs from "../pages/gig/Gig"
+import Gigs from "../pages/gigs/Gigs"
 import MyGig from "../pages/myGigs/MyGig"
 import Orders from "../pages/orders/Orders"
 import Message from "../pages/message/Message"
