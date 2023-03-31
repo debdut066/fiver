@@ -2,13 +2,13 @@ import React from 'react'
 import "./CategoryCard.scss"
 import { Link } from 'react-router-dom'
 
-const CategoryCard = ({ item }) => {
+const CategoryCard = ({ card }) => {
     return (
-        <Link to="/gigs ">
+        <Link to="/gigs?cat=desgin">
             <div className='CategoryCard'>
-                <img src={item.img} alt="" />
-                <span className='desc'>{item.desc}</span>
-                <span className='title'>{item.title}</span>
+                <img src={card.img} alt="" />
+                <span className='desc'>{card.desc}</span>
+                <span className='title'>{card.title}</span>
             </div>
         </Link>
     )
