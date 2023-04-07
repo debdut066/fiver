@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import db from "./database.js";
 import cors from "cors";
 import userRoute from "./routes/user.routes.js";
+import authRoute from "./routes/auth.routes.js"
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -19,7 +20,10 @@ app.use(cookieParser());
 dotenv.config();
 
 //Importing user routes
-app.use("api/user", userRoute);
+app.use("/api/user", userRoute);
+
+//Importing auth routes
+app.use("/api/auth", authRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
