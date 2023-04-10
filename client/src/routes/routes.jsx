@@ -1,6 +1,7 @@
 import React from "react"
 import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../Layout/DefaultLayout/DefaultLayout";
+import Login from "../pages/login/Login";
 import Home from "../pages/home/Home";
 import Gigs from "../pages/gigs/Gigs"
 import MyGig from "../pages/myGigs/MyGig"
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         path: "/gig/:id",
         element: <Gig />,
       },
+      {
+        path : "/login",
+        element : <Login/>
+      }
     ]
   }
 ])
