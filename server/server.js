@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import db from "./database.js";
 import cors from "cors";
 import userRoute from "./routes/user.routes.js";
-import authRoute from "./routes/auth.routes.js"
+import authRoute from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -34,5 +34,5 @@ app.use((err, req, res, next) => {
 
 app.listen(process.env.PORT, () => {
   db();
-  console.log("backend server running");
+  console.log(`backend server running at ${process.env.PORT}`);
 });

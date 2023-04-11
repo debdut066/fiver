@@ -10,6 +10,7 @@ import Message from "../pages/message/Message"
 import Messages from "../pages/messages/Messages";
 import Gig from "../pages/gig/Gig";
 import Add from "../pages/add/Add"
+import Register from "../pages/register/Register";
 
 const router = createBrowserRouter([
   {
@@ -49,8 +50,12 @@ const router = createBrowserRouter([
         element: <Gig />,
       },
       {
-        path : "/login",
-        element : <Login/>
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/register",
+        element: <Register />
       }
     ]
   }
