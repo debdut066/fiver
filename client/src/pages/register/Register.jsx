@@ -1,9 +1,12 @@
 import React from 'react'
 import "./Register.scss"
-import { upload } from '../../utils/upload';
+import { useNavigate } from "react-router-dom"
+// import { upload } from '../../utils/upload';
+import newRequest from "../../utils/newRequest"
 
 const Register = () => {
-  const [file, setFile] = React.useState(null);
+  const navigate = useNavigate();
+  const [file, setFile] = React.useState('http://storage.googleapis.com/dexbros_files/7a8ffc50-ec78-11ec-b0c6-9578be74f170-blank-profile-picture-973460_640.webp');
   const [user, setUser] = React.useState({
     username: "",
     email: "",
@@ -27,8 +30,20 @@ const Register = () => {
     })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    // let url = await upload(file);
+    // console.log(url)
+    try {
+      await newRequest.post('/auth/register', {
+        ...user,
+        img: file
+      })
+      navigate('/')
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -50,7 +65,7 @@ const Register = () => {
             placeholder='enter email'
             onChange={handleChange}
           />
-          <label>Email</label>
+          <label>Password</label>
           <input
             type="password"
             name="password"
@@ -65,7 +80,7 @@ const Register = () => {
           <label>Country</label>
           <input
             type="text"
-            name="password"
+            name="country"
             placeholder='enter password'
             onChange={handleChange}
           />
@@ -87,7 +102,7 @@ const Register = () => {
             placeholder='enter phone Number'
             onChange={handleChange}
           />
-          <label>Country</label>
+          <label>Description</label>
           <textarea
             type="text"
             name="descp"

@@ -47,12 +47,12 @@ const Navbar = () => {
           <span>Fiverr Business</span>
           <span>Explore</span>
           <span>English</span>
-          <span>Sign in</span>
+          <span onClick={() => navigate('/login')}>Sign in</span>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
           {!currentUser && <button onClick={() => navigate('/register')}>Join</button>}
           {currentUser && (
             <div className='user' onClick={() => setOpen(!open)}>
-              <img src={currentUser.img || "https://images.pexels.com/photos/1115697/pexels-photo-1115697.jpeg?auto=compress&cs=tinysrgb&w=1600"} alt="" />
+              <img src={currentUser.img} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className='options'>

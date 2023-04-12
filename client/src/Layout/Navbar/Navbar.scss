@@ -37,6 +37,10 @@
       font-weight: 500;
       font-family: "Montserrat", sans-serif;
 
+      span {
+        cursor: pointer;
+      }
+
       .user {
         display: flex;
         align-items: center;

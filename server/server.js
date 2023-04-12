@@ -4,6 +4,7 @@ import db from "./database.js";
 import cors from "cors";
 import userRoute from "./routes/user.routes.js";
 import authRoute from "./routes/auth.routes.js";
+import gigRoute from "./routes/gig.routes.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -24,6 +25,9 @@ app.use("/api/user", userRoute);
 
 //Importing auth routes
 app.use("/api/auth", authRoute);
+
+//Importing gig routes
+app.use("/api/gig", gigRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

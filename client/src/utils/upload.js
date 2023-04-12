@@ -7,7 +7,7 @@ export const upload = async (file) => {
 
   try {
     const result = await axios.post(
-      "https://api.cloudinary/v1_1/Grey Mirror/image",
+      `https://api.cloudinary/v1_1/Grey Mirror/image/upload`,
       data
     );
     const { url } = result.data;
