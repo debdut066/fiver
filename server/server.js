@@ -27,7 +27,7 @@ app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 
 //Importing gig routes
-app.use("/api/gig", gigRoute);
+app.use("/api/gigs", gigRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
