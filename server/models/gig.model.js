@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const GigSchema = new Schema(
   {
-    _id: { type: Schema.Types.ObjectId },
     userId: { type: String, required: true },
     title: { type: String, required: true },
     desc: { type: String, required: true },
