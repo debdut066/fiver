@@ -18,12 +18,14 @@ const Gigs = () => {
     queryFn: () =>
       newRequest
         .get(
-          `/gigs${search}min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
+          `/gigs`
         )
         .then((res) => {
           return res.data;
         }),
   });
+
+  console.log(data)
 
   React.useEffect(() => {
     refetch();
