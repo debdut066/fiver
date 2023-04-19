@@ -33,7 +33,7 @@ export const deleteGig = async (req, res, next) => {
 
 export const getGig = async (req, res, next) => {
   try {
-    const gig = Gig.findById(req.params.id);
+    const gig = await Gig.findById(req.params.id);
     if (!gig) next(createError(404, "Gig not found"));
     return res.status(200).send(gig);
   } catch (error) {
