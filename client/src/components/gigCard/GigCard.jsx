@@ -10,7 +10,7 @@ const GigCard = ({ item }) => {
         queryKey: [item.userId],
         queryFn: () =>
             newRequest
-                .get(`/user/${item.userId}`)
+                .get(`/users/${item.userId}`)
                 .then((res) => {
                     return res.data;
                 }),
