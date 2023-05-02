@@ -5,6 +5,7 @@ import cors from "cors";
 import userRoute from "./routes/user.routes.js";
 import authRoute from "./routes/auth.routes.js";
 import gigRoute from "./routes/gig.routes.js";
+import reviewRoute from "./routes/review.routes.js"
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -21,13 +22,16 @@ app.use(cookieParser());
 dotenv.config();
 
 //Importing user routes
-app.use("/api/user", userRoute);
+app.use("/api/users", userRoute);
 
 //Importing auth routes
 app.use("/api/auth", authRoute);
 
 //Importing gig routes
 app.use("/api/gigs", gigRoute);
+
+//Importing review routes
+app.use('/api/reviews',reviewRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
