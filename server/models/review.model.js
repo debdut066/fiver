@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 const ReviewSchema = new Schema(
   {
-    _id: { type: Schema.Types.ObjectId },
     gigId: { type: String, required: true },
     userId: { type: String, required: true },
     star: { type: Number, required: true, enum: [1, 2, 3, 4, 5] },
