@@ -1,36 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import "./GigCard.scss"
-import newRequest from '../../utils/newRequest'
-import { useQuery } from "@tanstack/react-query"
 
 const GigCard = ({ item }) => {
-
-    const { isLoading, error, data } = useQuery({
-        queryKey: [item.userId],
-        queryFn: () =>
-            newRequest
-                .get(`/users/${item.userId}`)
-                .then((res) => {
-                    return res.data;
-                }),
-    });
-
     return (
         <Link to={`/gig/${item._id}`} className="link">
             <div className="gigCard">
                 <img src={item.cover} alt="" />
                 <div className="info">
-                    {isLoading ? (
-                        "loading"
-                    ) : error ? (
-                        "Something went wrong!"
-                    ) : (
-                        <div className="user">
-                            <img src={data.img || "/img/noavatar.jpg"} alt="" />
-                            <span>{data.username}</span>
-                        </div>
-                    )}
+                    <div className="user">
+                        <img src={item.userId.img || "/img/noavatar.jpg"} alt="" />
+                        <span>{item.userId.username}</span>
+                    </div>
                     <p>{item.desc}</p>
                     <div className="star">
                         <img src="./img/star.png" alt="" />

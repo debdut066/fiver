@@ -33,7 +33,7 @@ export const deleteGig = async (req, res, next) => {
 
 export const getGig = async (req, res, next) => {
   try {
-    const gig = await Gig.findById(req.params.id);
+    const gig = await Gig.findById(req.params.id).populate("userId");
     if (!gig) next(createError(404, "Gig not found"));
     return res.status(200).send(gig);
   } catch (error) {
@@ -55,7 +55,9 @@ export const getGigs = async (req, res, next) => {
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
   };
   try {
-    const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
+    const gigs = await Gig.find(filters)
+      .populate("userId")
+      .sort({ [q.sort]: -1 });
     res.status(200).send(gigs);
   } catch (err) {
     next(err);

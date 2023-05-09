@@ -2,10 +2,11 @@ import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import createError from "../utils/createError.js";
+import { comparePassword, generateToken, generateHashPassword } from "../utils/helper.js";
 
 export const register = async (req, res, next) => {
   try {
-    const hashPassword = bcrypt.hashSync(req.body.password, 5);
+    const hashPassword = generateHashPassword(req.body.password);
     const newUser = new User({
       ...req.body,
       password: hashPassword,
@@ -25,20 +26,14 @@ export const login = async (req, res, next) => {
     if (!user) {
       return next(createError(404, "User not found"));
     } else {
-      const isValidPassword = bcrypt.compareSync(
+      const isValidPassword = comparePassword(
         req.body.password,
         user.password
-      );
+      )
       if (!isValidPassword) {
         return next(createError(400, "wrong password"));
       } else {
-        const token = jwt.sign(
-          {
-            id: user._id,
-            isSeller: user.isSeller,
-          },
-          process.env.JWT_KEY
-        );
+        const token = generateToken(user)
 
         const { password, ...info } = user._doc;
         res

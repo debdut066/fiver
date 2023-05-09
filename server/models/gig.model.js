@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 const { Schema } = mongoose;
 
 const GigSchema = new Schema(
   {
-    userId: { type: String, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref : "User", required: true },
     title: { type: String, required: true },
     desc: { type: String, required: true },
     totalStars: { type: Number, default: 0 },
@@ -12,7 +12,6 @@ const GigSchema = new Schema(
     price: { type: Number, required: true },
     cover: { type: String, required: true },
     images: { type: [String], required: false },
-    userId: { type: String, required: true },
     shortTitle: { type: String, required: true },
     shortDesc: { type: String, required: true },
     deliveryTime: { type: Number, required: true },

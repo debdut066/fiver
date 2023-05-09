@@ -5,6 +5,7 @@ import cors from "cors";
 import userRoute from "./routes/user.routes.js";
 import authRoute from "./routes/auth.routes.js";
 import gigRoute from "./routes/gig.routes.js";
+import orderRoute from "./routes/order.routes.js"
 import reviewRoute from "./routes/review.routes.js"
 import cookieParser from "cookie-parser";
 
@@ -32,6 +33,9 @@ app.use("/api/gigs", gigRoute);
 
 //Importing review routes
 app.use('/api/reviews',reviewRoute);
+
+//Importing orders routes
+app.use('/api/orders',orderRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
