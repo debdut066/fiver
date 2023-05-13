@@ -7,6 +7,7 @@ import authRoute from "./routes/auth.routes.js";
 import gigRoute from "./routes/gig.routes.js";
 import orderRoute from "./routes/order.routes.js"
 import reviewRoute from "./routes/review.routes.js"
+import conversationRoute from "./routes/conversations.routes.js"
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -36,6 +37,9 @@ app.use('/api/reviews',reviewRoute);
 
 //Importing orders routes
 app.use('/api/orders',orderRoute);
+
+//Importing conversation routes
+app.use('/api/conversations',conversationRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
