@@ -1,6 +1,6 @@
 import createError from "../utils/createError.js"
-import Review from "../models/review.model.js";
-import Gig from "../models/gig.model.js"
+import Review from "../Schema/review.Schema.js";
+import Gig from "../Schema/gig.Schema.js"
 
 export const createReview = async (req, res, next) => {
     if(req.isSeller){

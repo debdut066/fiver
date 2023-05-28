@@ -1,10 +1,12 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom"
 import "./Orders.scss"
 import newRequest from '../../utils/newRequest'
 import { useQuery } from "@tanstack/react-query"
 
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  const navigate = useNavigate();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
@@ -18,8 +20,24 @@ const Orders = () => {
         }),
   });
 
-  const handleContact = () => {
+  const handleContact = async (order) => {
+    const buyerId = order.buyerId;
+    const sellerId = order.sellerId;
+    const Id = sellerId + buyerId;
 
+    try {
+      const res = await newRequest.get(`/conversations/single/${Id}`);
+      console.log(res,"2")
+      navigate(`/message/${res.data.id}`);
+    } catch (err) {
+      if (err.response.status === 404) {
+        const res = await newRequest.post(`/conversations/`, {
+          to: currentUser.seller ? buyerId : sellerId,
+        });
+        console.log(res,"1")
+        navigate(`/message/${res.data.id}`);
+      }
+    }
   }
 
   return (

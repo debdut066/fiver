@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import createError from "../utils/createError.js"
-import Order from "../models/order.model.js"
-import Gig from "../models/gig.model.js"
+import Order from "../Schema/order.Schema.js"
+import Gig from "../Schema/gig.Schema.js"
 
 export const createOrder = async (req, res, next) => {
     try {

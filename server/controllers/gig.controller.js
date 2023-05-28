@@ -1,18 +1,13 @@
-import Gig from "../models/gig.model.js";
 import createError from "../utils/createError.js";
+import * as GigModel from "../models/gig.models.js"
 
 export const createGig = async (req, res, next) => {
   if (!req.isSeller)
     return next(createError(403, "Only sellers can create a gig!"));
 
-  const newGig = new Gig({
-    userId: req.userId,
-    ...req.body,
-  });
-
   try {
-    const saveGig = await newGig.save();
-    res.status(201).json(saveGig);
+    const newGig = await GigModel.SaveNewGig(req.userId, req.body); 
+    return res.status(201).json(newGig);
   } catch (error) {
     next(error);
   }
@@ -20,12 +15,13 @@ export const createGig = async (req, res, next) => {
 
 export const deleteGig = async (req, res, next) => {
   try {
-    const gig = await Gig.findById(req.params.id);
+    const gig = await GigModel.FindGigAndReturn(req.params.id);
+
     if (gig.userId !== req.userId)
       return next(createError(403, "You can delete only your gig!"));
 
-    await Gig.findByIdAndDelete(req.params.id);
-    res.status(200).send("Gig has been deleted!");
+    const deletedGig = await GigModel.DeleteGig(req.params.id)
+    res.status(200).send(deletedGig);
   } catch (err) {
     next(err);
   }
@@ -33,9 +29,11 @@ export const deleteGig = async (req, res, next) => {
 
 export const getGig = async (req, res, next) => {
   try {
-    const gig = await Gig.findById(req.params.id).populate("userId");
+    const gig = await GigModel.FindGigAndReturn(req.params.id);
+
     if (!gig) next(createError(404, "Gig not found"));
     return res.status(200).send(gig);
+  
   } catch (error) {
     next(error);
   }
@@ -55,11 +53,12 @@ export const getGigs = async (req, res, next) => {
     ...(q.search && { title: { $regex: q.search, $options: "i" } }),
   };
   try {
-    const gigs = await Gig.find(filters)
-      .populate("userId")
-      .sort({ [q.sort]: -1 });
+
+    const gigs = await GigModel.GetGig(filters, q.sort);
     res.status(200).send(gigs);
-  } catch (err) {
-    next(err);
+
+  } catch (error) {
+    console.log(error)
+    next(error);
   }
 };

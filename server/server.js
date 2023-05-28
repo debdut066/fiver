@@ -8,6 +8,7 @@ import gigRoute from "./routes/gig.routes.js";
 import orderRoute from "./routes/order.routes.js"
 import reviewRoute from "./routes/review.routes.js"
 import conversationRoute from "./routes/conversations.routes.js"
+import messageRoute from "./routes/message.routes.js"
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -40,6 +41,9 @@ app.use('/api/orders',orderRoute);
 
 //Importing conversation routes
 app.use('/api/conversations',conversationRoute);
+
+//Importing message routes
+app.use('/api/messages',messageRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
