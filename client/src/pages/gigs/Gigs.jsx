@@ -4,6 +4,7 @@ import GigCard from '../../components/gigCard'
 import "./Gigs.scss"
 import newRequest from '../../utils/newRequest'
 import { useQuery } from "@tanstack/react-query"
+import HomeLoader from "../../components/homeLoader/homeLoader"
 
 const Gigs = () => {
   const [sort, setSort] = React.useState("sales")
@@ -73,7 +74,7 @@ const Gigs = () => {
         </div>
         <div className="cards">
           {isLoading
-            ? "loading"
+            ? <HomeLoader/>
             : error
               ? "Something went wrong!"
               : data.map((gig) => <GigCard key={gig._id} item={gig} />)

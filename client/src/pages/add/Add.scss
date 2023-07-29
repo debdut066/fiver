@@ -36,6 +36,23 @@
           textarea {
             padding: 20px;
           }
+
+          .images{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .imagesInput {
+              display: flex;
+              flex-direction: column;
+              gap: 20px;
+            }
+          }
+
+          .add{
+            display: flex;
+            justify-content: flex-start;
+          }
   
           button {
             border: none;

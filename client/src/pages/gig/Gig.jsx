@@ -1,9 +1,12 @@
 import React from "react";
 import "./Gig.scss";
+import { Link } from "react-router-dom";
+import Error from "../../components/error/Error"
 import { Slider } from "infinite-react-carousel/lib";
 import newRequest from "../../utils/newRequest";
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom";
+import HomeLoader from "../../components/homeLoader/homeLoader";
 import Reviews from "../../components/reviews/Reviews";
 
 function Gig() {
@@ -24,9 +27,9 @@ function Gig() {
   return (
     <div className="gig">
       {isLoading ? (
-        "loading"
+        <HomeLoader/>
       ) : error ? (
-        "Something went wrong"
+        <Error/>
       ) : (
         <div className="container">
           <div className="left">
@@ -135,7 +138,9 @@ function Gig() {
                 </div>
               ))}
             </div>
-            <button>Continue</button>
+            <Link to={`/pay/${id}`}>
+              <button>Continue</button>
+            </Link>
           </div>
         </div>
       )

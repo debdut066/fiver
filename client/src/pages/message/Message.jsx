@@ -1,13 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import newRequest from '../../utils/newRequest'
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
+import Loaders from '../../components/loader/Loaders'
+import Error from "../../components/error/Error"
 import "./Message.scss"
 
 const Message = () => {
   const { id } = useParams()
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  const currentUser = useSelector(state => state.user.user)
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -47,8 +50,8 @@ const Message = () => {
           <Link to="/messages">Messages</Link> {'/'} John Doe {'/'}
         </span>
         { isLoading ? (
-          "loading ") : error ? (
-            "error"
+          <Loaders/> ) : error ? (
+            <Error/>
           ) : (
             <div className="messages">
               {data.map((m) => (

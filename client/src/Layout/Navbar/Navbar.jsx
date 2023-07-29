@@ -1,10 +1,14 @@
 import React from 'react'
+import { useSelector } from "react-redux"
 import "./Navbar.scss"
+import useScrollActive from '../../hooks/useScrollActive';
+import { routeConfig } from '../../config/routes';
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import newRequest from '../../utils/newRequest';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { user } = useSelector(state => state.user);
   const [active, setActive] = React.useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -12,26 +16,26 @@ const Navbar = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   }
 
-  React.useEffect(() => {
-    window.addEventListener('scroll', isActive);
-
-    return () => {
-      window.removeEventListener('scroll', isActive);
-    }
-  }, [])
-
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+  useScrollActive(active, isActive);
 
   const { pathname } = useLocation();
 
   const handleLogout = async () => {
     try {
       await newRequest.post('/auth/logout')
-      localStorage.setItem('currentUser', null)
+      localStorage.setItem('user', null)
       navigate('/')
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const navigateToRegister = () => {
+    navigate(routeConfig.register)
+  }
+
+  const navigateToLogin = () => {
+    navigate(routeConfig.login)
   }
 
   return (
@@ -44,26 +48,26 @@ const Navbar = () => {
           <span className="fiverDot">.</span>
         </div>
         <div className="navLinks">
-          <span>Fiverr Business</span>
+          {/* <span>Fiverr Business</span> */}
           <span>Explore</span>
           <span>English</span>
-          <span onClick={() => navigate('/login')}>Sign in</span>
-          {!currentUser?.isSeller && <span>Become a Seller</span>}
-          {!currentUser && <button onClick={() => navigate('/register')}>Join</button>}
-          {currentUser && (
+          {!user && <span onClick={navigateToLogin}>Sign in</span>}
+          {/* {!user?.isSeller && <span>Become a Seller</span>} */}
+          {!user && <button onClick={navigateToRegister}>Join</button>}
+          {user && (
             <div className='user' onClick={() => setOpen(!open)}>
-              <img src={currentUser.img} alt="" />
-              <span>{currentUser?.username}</span>
+              <img src={user.img} alt="" />
+              <span>{user?.username}</span>
               {open && (
                 <div className='options'>
-                  {currentUser?.isSeller && (
+                  {user.isSeller && (
                     <>
-                      <Link className='link' to="/mygigs">Gigs</Link>
-                      <Link className='link' to="/add">Add New Gig</Link>
+                      <Link className='link' to={routeConfig.myGigs}>Gigs</Link>
+                      <Link className='link' to={routeConfig.add}>Add New Gig</Link>
                     </>
                   )}
-                  <Link className='link' to="/orders">Orders</Link>
-                  <Link className='link' to="/messages">Messages</Link>
+                  <Link className='link' to={routeConfig.orders}>Orders</Link>
+                  <Link className='link' to={routeConfig.messages}>Messages</Link>
                   <Link className='link' onClick={handleLogout}>Logout</Link>
                 </div>
               )}

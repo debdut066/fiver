@@ -1,27 +1,37 @@
 import React from 'react'
-import "./Login.scss"
-import newRequest from '../../utils/newRequest';
+import { routeConfig } from '../../config/routes';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux"
+import Loader from "../../components/loader/Loader"
+import { userLogin } from '../../store/actions/userAction';
+import Error from '../../components/error/Error';
+
+import "./Login.scss"
 
 const Login = () => {
-  const [error, setError] = React.useState(null);
+  const { success, error, loading } = useSelector(state => state.user)
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  React.useEffect(()=>{
+    if(success){
+      navigate(routeConfig.home)
+    }
+  },[success])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const res = await newRequest.post('/auth/login', { username, password });
-      localStorage.setItem("currentUser",JSON.stringify(res.data));
-      navigate('/')
-    }catch(error){
-      setError(error.response.data)
-    }
+    dispatch(userLogin({
+      username : username,
+      password : password
+    }));
   }
 
   return (
     <div className='login'>
+      {error && <Error message={error}/>}
       <form onSubmit={handleSubmit}>
         <h1>Sign in</h1>
         <label>Username</label>
@@ -38,8 +48,9 @@ const Login = () => {
           placeholder='password'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type='submit'>Login</button>
-        {error && <span>{error}</span>}
+        <button type='submit'>{
+          loading ? <Loader/> : "Login"
+        }</button>
       </form>
     </div>
   )

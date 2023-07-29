@@ -1,12 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
 import newRequest from '../../utils/newRequest'
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import "./Messages.scss"
 import moment from "moment";
+import Error from '../../components/error/Error'
+import Loaders from '../../components/loader/Loaders'
 
 const Messages = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  const currentUser = useSelector(state => state.user.user);
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -34,9 +37,9 @@ const Messages = () => {
   return (
     <div className="messages">
       {isLoading ? (
-        "loading"
+        <Loaders/>
       ) : error ? (
-        "error"
+        <Error/>
       ) : (
         <div className="container">
           <div className="title">

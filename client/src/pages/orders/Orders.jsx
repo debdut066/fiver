@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from "react-router-dom"
 import "./Orders.scss"
 import newRequest from '../../utils/newRequest'
+import Loaders from '../../components/loader/Loaders'
 import { useQuery } from "@tanstack/react-query"
 
 const Orders = () => {
@@ -27,14 +28,12 @@ const Orders = () => {
 
     try {
       const res = await newRequest.get(`/conversations/single/${Id}`);
-      console.log(res,"2")
       navigate(`/message/${res.data.id}`);
     } catch (err) {
       if (err.response.status === 404) {
         const res = await newRequest.post(`/conversations/`, {
           to: currentUser.seller ? buyerId : sellerId,
         });
-        console.log(res,"1")
         navigate(`/message/${res.data.id}`);
       }
     }
@@ -43,7 +42,7 @@ const Orders = () => {
   return (
     <div className="orders">
       {isLoading ? (
-        "loading"
+        <Loaders/>
       ) : error ? (
         "error"
       ) : (
