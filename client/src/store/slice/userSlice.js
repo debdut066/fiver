@@ -3,14 +3,15 @@ import { userLogin, userRegister } from "../actions/userAction";
 
 // initialize TOKEN from local storage
 const userJson = localStorage.getItem("currentUser");
+const token = localStorage.getItem("token")
 const user = JSON.parse(userJson) || null;
 
 const initialState = {
-  user: user,
+  user: user || null,
   error : null,
   loader : false,
   success : false,
-  token : null
+  token : token || null
 };
 
 const userSlice = createSlice({
@@ -18,8 +19,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser : (state, action) => {
-        state.user = action.payload;
-        localStorage.setItem('currentUser', JSON.stringify(action.payload));
+      state.user = action.payload;
+      localStorage.setItem('currentUser', JSON.stringify(action.payload));
     }
   },
   extraReducers : (builder) => {
@@ -27,9 +28,14 @@ const userSlice = createSlice({
       state.loading = true;
       state.error  = null;
     }),
-    builder.addCase(userRegister.fulfilled, (state) => {
+    builder.addCase(userRegister.fulfilled, (state, { payload }) => {
+      console.log(payload)
       state.loading = false;
       state.success = true;
+      state.user = payload.user;
+      state.token = payload.token;
+      localStorage.setItem('currentUser', JSON.stringify(payload.user));
+      localStorage.setItem('token', payload.token);
     }),
     builder.addCase(userRegister.rejected, (state, { payload }) => {
       state.loading = false;

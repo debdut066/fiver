@@ -23,12 +23,14 @@ export const userLogin = createAsyncThunk(
 
 export const userRegister = createAsyncThunk(
     routeConfig.register,
-    async ({ user, file }, thunkAPI) => {
+    async ({ username , password, email}, thunkAPI) => {
         try {
-            await newRequest.post('/auth/register', {
-                ...user,
-                img: file
+            const user = await newRequest.post('/auth/register', {
+                username : username,
+                email : email,
+                password : password
             })
+            return user.data;
         } catch (error) {
             if(error.response && error.response.data.message){
                 return thunkAPI.rejectWithValue(error.response.data)
