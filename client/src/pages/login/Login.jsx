@@ -1,6 +1,6 @@
 import React from 'react'
 import { routeConfig } from '../../config/routes';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
 import Loader from "../../components/loader/Loader"
 import { userLogin } from '../../store/actions/userAction';
@@ -33,19 +33,23 @@ const Login = () => {
     <div className='login'>
       {error && <Error message={error}/>}
       <form onSubmit={handleSubmit}>
-        <h1>Sign in</h1>
-        <label>Username</label>
+        <div className='login--text'>
+          <h1>Sign in to your account</h1>
+          <div className='login--info'>
+            <h4>Don't have an account?</h4>
+            <Link to={routeConfig.register}>Join here</Link>
+          </div>
+        </div>
+        <label>Email or username</label>
         <input
           type="text"
           name="username"
-          placeholder='username'
           onChange={(e) => setUsername(e.target.value)}
         />
         <label>Password</label>
         <input
           name="password"
           type="password"
-          placeholder='password'
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type='submit'>{
