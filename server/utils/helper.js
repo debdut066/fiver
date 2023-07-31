@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt"
+import userSchema from "../Schema/user.Schema.js";
 import jwt from "jsonwebtoken";
 
 export const comparePassword = (Inputpassword, UserPassword) => {
@@ -17,6 +18,8 @@ export const generateToken = (user) => {
     const token = jwt.sign(
         {
           id: user._id,
+          username : user.username,
+          email : user.email,
           isSeller: user.isSeller,
         },
         process.env.JWT_KEY
@@ -34,5 +37,16 @@ export const generateHashPassword = (password) => {
         return newPassword;
     } catch (error) {
         return false;
+    }
+}
+
+export const existUser = async (userName, email) => {
+    try {
+        const userExist = await userSchema.find({
+            $or : [{ email : email}, { username : userName }]        
+        });
+        return userExist;
+    } catch (error) {
+        throw error.message
     }
 }

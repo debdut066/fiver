@@ -1,14 +1,16 @@
 import createError from "../utils/createError.js";
-import { comparePassword, generateToken, generateHashPassword } from "../utils/helper.js";
+import { comparePassword, generateToken } from "../utils/helper.js";
 import * as AuthModel from "../models/auth.models.js"
 
 /* Register User */
 export const register = async (req, res, next) => {
   try {
-    const hashPassword = generateHashPassword(req.body.password);
-
-    await AuthModel.createUser(req.body, hashPassword);
-    return res.status(201).send("User has been created.");
+    if(!req.body.username.trim() || !req.body.email.trim() || !req.body.password.trim()){
+      throw new Error("Some of the parameter are missing")
+    }else{
+      const user = await AuthModel.createUser(req.body);
+      return res.status(201).json(user);
+    }
   } catch (error) {
     console.log(error);
     next(error);
