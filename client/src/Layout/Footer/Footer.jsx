@@ -1,4 +1,7 @@
 import React from 'react'
+import { FaTwitter, FaFacebookSquare, FaLinkedin, FaRupeeSign } from "react-icons/fa"
+import { FaSquarePinterest, FaSquareInstagram } from "react-icons/fa6"
+import { RiEnglishInput } from "react-icons/ri"
 import "./Footer.scss"
 
 const Footer = () => {
@@ -71,19 +74,19 @@ const Footer = () => {
                     </div>
                     <div className="right">
                         <div className="social">
-                            <img src="./img/twitter.png" alt="" />
-                            <img src="./img/facebook.png" alt="" />
-                            <img src="./img/linkedin.png" alt="" />
-                            <img src="./img/pinterest.png" alt="" />
-                            <img src="./img/instagram.png" alt="" />
+                            <FaTwitter />
+                            <FaFacebookSquare/>
+                            <FaLinkedin/>
+                            <FaSquarePinterest/>
+                            <FaSquareInstagram />
                         </div>
                         <div className="link">
-                            <img src="./img/language.png" alt="" />
+                            <RiEnglishInput />
                             <span>English</span>
                         </div>
                         <div className="link">
-                            <img src="/img/coin.png" alt="" />
-                            <span>USD</span>
+                            <FaRupeeSign/>
+                            <span>INR</span>
                         </div>
                         <img src="/img/accessibility.png" />
                     </div>

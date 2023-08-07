@@ -15,10 +15,10 @@
   }
 
   .navbarContainer {
-    width: 1400px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 20px 0px;
+    padding: 20px 50px;
 
     .fiverLogo {
       font-size: 34px;
@@ -71,14 +71,31 @@
         }
       }
 
-      button {
+      .btn-active{
+        color: #1dbf73;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 1px solid #1dbf73;
+        cursor: pointer;
+        background-color: transparent;
+        font-weight: 500;
+        font-family: "Montserrat", sans-serif;
+
+        &:hover {
+          background-color: #1dbf73;
+          color: white;
+        }
+      }
+
+      .btn-join{
         color: white;
         padding: 10px 20px;
         border-radius: 5px;
         border: 1px solid white;
         cursor: pointer;
         background-color: transparent;
-
+        font-weight: 500;
+        font-family: "Montserrat", sans-serif;
         &:hover {
           background-color: #1dbf73;
           border-color: #1dbf73;
@@ -94,12 +111,16 @@
   }
 
   .menu {
-    width: 1400px;
+    width: 100%;
     padding: 10px 0px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     font-weight: 300;
     color: gray;
     font-family: "Montserrat", sans-serif;
+
+    a{ 
+      width: auto;
+    }
   }
 }

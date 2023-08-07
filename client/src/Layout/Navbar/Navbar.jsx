@@ -1,13 +1,14 @@
 import React from 'react'
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { logout } from '../../store/slice/userSlice';
 import "./Navbar.scss"
 import useScrollActive from '../../hooks/useScrollActive';
 import { routeConfig } from '../../config/routes';
 import { Link, useLocation, useNavigate } from "react-router-dom"
-import newRequest from '../../utils/newRequest';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
   const [active, setActive] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -22,8 +23,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await newRequest.post('/auth/logout')
-      localStorage.setItem('user', null)
+      dispatch(logout())
       navigate('/')
     } catch (error) {
       console.log(error);
@@ -53,7 +53,7 @@ const Navbar = () => {
           <span>English</span>
           {!user && <span onClick={navigateToLogin}>Sign in</span>}
           {/* {!user?.isSeller && <span>Become a Seller</span>} */}
-          {!user && <button onClick={navigateToRegister}>Join</button>}
+          {!user && <button className={active ? "btn-active" : "btn-join"} onClick={navigateToRegister}>JoIn</button>}
           {user && (
             <div className='user' onClick={() => setOpen(!open)}>
               <img src={user.img} alt="" />
