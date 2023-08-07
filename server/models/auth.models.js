@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import User from "../Schema/user.Schema.js";
-import { generateHashPassword, generateToken, existUser } from "../utils/helper.js";
+import { generateHashPassword, generateToken, existUser, comparePassword } from "../utils/helper.js";
 
-export const createUser = async (Body) => {
+export const registerUser = async (Body) => {
     const isUser = await existUser(Body.email, Body.username);
     if(isUser.length === 0){
         const hashPassword = await generateHashPassword(Body.password);
@@ -29,5 +29,25 @@ export const createUser = async (Body) => {
         }
     }else{
         return "Username or Email already has been taken";
+    }
+}
+
+export const loginUser = async (Body) => {
+    const isUser = await existUser(Body.username, Body.username);
+
+    if(isUser.length === 0){
+        return "Incorrect username or email"
+    }else{
+        const isPasswordValid = await comparePassword(Body.password, isUser[0].password);
+        if(!isPasswordValid){
+            return "Password is incorrect"
+        }else{
+            const token = await generateToken(isUser[0]);
+            return {
+                msg : "LogIn is successfull",
+                user : isUser[0],
+                token : token
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ export const comparePassword = (Inputpassword, UserPassword) => {
     try {
         return isValid;
     } catch (error) {
+        console.log(error)
         return false;
     }
 }

@@ -10,3 +10,7 @@ router.get("/single/:id", verifyToken, GigController.getGig);
 router.get("/", GigController.getGigs);
 
 export default router;
+
+
+// seo, illustration, social media, ai artist, logo design, video explainer, 
+// voice over, wordpress
