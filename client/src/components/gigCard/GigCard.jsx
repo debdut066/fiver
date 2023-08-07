@@ -1,4 +1,5 @@
 import React from 'react'
+import { AiFillStar, AiFillHeart } from "react-icons/ai"
 import { Link } from 'react-router-dom'
 import "./GigCard.scss"
 
@@ -14,14 +15,14 @@ const GigCard = ({ item }) => {
                     </div>
                     <p>{item.desc}</p>
                     <div className="star">
-                        <img src="./img/star.png" alt="" />
+                        <AiFillStar />
                         {!isNaN(item.totalStars / item.starNumber) &&
                             Math.round(item.totalStars / item.starNumber)}
                     </div>
                 </div>
                 <hr />
                 <div className="detail">
-                    <img src="./img/heart.png" alt="" />
+                    <AiFillHeart />
                     <div className="price">
                         <span>STARTING AT</span>
                         <h2>
