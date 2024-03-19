@@ -19,16 +19,16 @@ const Gigs = () => {
     queryFn: () =>
       newRequest
         .get(
-          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
+          `/gigs?${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
         )
         .then((res) => {
           return res.data;
         }),
   });
 
-  React.useEffect(() => {
-    refetch();
-  }, [sort])
+  // React.useEffect(() => {
+  //   refetch();
+  // }, [sort])
 
   const reSort = (type) => {
     setSort(type)
@@ -74,7 +74,7 @@ const Gigs = () => {
         </div>
         <div className="cards">
           {isLoading
-            ? <HomeLoader/>
+            ? <HomeLoader />
             : error
               ? "Something went wrong!"
               : data.map((gig) => <GigCard key={gig._id} item={gig} />)

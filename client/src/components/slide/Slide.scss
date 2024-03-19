@@ -2,28 +2,29 @@
   display: flex;
   justify-content: center;
   padding: 100px 0px;
+  background-color: rgb(214, 102, 102);
 
-  .container {
-    width: 1400px;
-    position: relative;
-  }
-  .carousel-initialized {
-    position: static;
-  }
+  // .container {
+  //   width: 1400px;
+  //   position: relative;
+  // }
+  // .carousel-initialized {
+  //   position: static;
+  // }
 
-  .carousel-prev,
-  .carousel-next {
-    width: 50px;
-    height: 50px;
-    background-color: rgb(243, 243, 243);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
+  // .carousel-prev,
+  // .carousel-next {
+  //   width: 50px;
+  //   height: 50px;
+  //   background-color: rgb(243, 243, 243);
+  //   border-radius: 50%;
+  //   position: absolute;
+  //   top: 0;
+  //   bottom: 0;
+  //   margin: auto;
+  // }
 
-  .carousel-prev {
-    left: -25px;
-  }
+  // .carousel-prev {
+  //   left: -25px;
+  // }
 }

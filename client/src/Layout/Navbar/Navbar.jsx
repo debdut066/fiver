@@ -1,9 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { logout } from '../../store/slice/userSlice';
+// import { logout } from '../../store/slice/userSlice';
 import "./Navbar.scss"
 import useScrollActive from '../../hooks/useScrollActive';
 import { routeConfig } from '../../config/routes';
+import { Button } from "../../components/ui/button"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 
 const Navbar = () => {
@@ -23,7 +24,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      dispatch(logout())
+      // dispatch(logout())
       navigate('/')
     } catch (error) {
       console.log(error);
@@ -53,7 +54,8 @@ const Navbar = () => {
           <span>English</span>
           {!user && <span onClick={navigateToLogin}>Sign in</span>}
           {/* {!user?.isSeller && <span>Become a Seller</span>} */}
-          {!user && <button className={active ? "btn-active" : "btn-join"} onClick={navigateToRegister}>JoIn</button>}
+          {/* {!user && <Button className={active ? "btn-active" : "btn-join"} onClick={navigateToRegister}>JoIn</Button>} */}
+          {!user && <Button variant="secondary" onClick={navigateToRegister}>JoIn</Button>}
           {user && (
             <div className='user' onClick={() => setOpen(!open)}>
               <img src={user.img} alt="" />
